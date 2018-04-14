@@ -2,20 +2,23 @@
 
 {% block content %}
 
-<h1>Build A Blog</h1>
-<p><a href="/blog">Main Page</a> <a href="/add-post">New Post</a></p>
+
+<p><a href="/blog">Main Blog Page</a><span style="display:inline-block; width: 10px;"></span>
+    <a href="/newpost">Add a Blog Entry</a></p>
+
+    <h1 align="center">Build a Blog</h1>
 
 {% if view_post != "" %}
-<h1>{{view_post.title}}</h1>
-<p>{{view_post.content}}</p>
+<h1 align="center">{{view_post.title}}</h1>
+<p>{{view_post.content}}<hr></p>
 {% endif %}
 
 {% if view_post == "" %}
-<ul>
+<ul style="list-style: none;">
     {% for post in posts %}
     <li>
-        <p><a href=/blog?post_id={{post.id}}>{{post.title}}</a></p>
-        <p>{{post.content}}</p>
+        <h2><a href=/blog?id={{post.id}}>{{post.title}}</a></h1>
+        <p>{{post.content}}<hr></p>
     </li>
     {% endfor %}
 </ul>
