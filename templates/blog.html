@@ -8,20 +8,16 @@
 
     <h1 align="center">Build a Blog</h1>
 
-{% if view_post != "" %}
-<h1 align="center">{{view_post.title}}</h1>
-<p>{{view_post.content}}<hr></p>
-{% endif %}
 
-{% if view_post == "" %}
 <ul style="list-style: none;">
     {% for post in posts %}
-    <li>
-        <h2><a href=/blog?id={{post.id}}>{{post.title}}</a></h1>
-        <p>{{post.content}}<hr></p>
-    </li>
+ 
+        <h2><a href=/blog?id={{post.id}}>{{post.title}}</a></h2>
+        <p>{{post.content}}</p>
+        <p><strong>Post By: </strong><a href="/blog?user={{blog.owner_id}}">{{blog.owner.username}}</a></p>
+        <hr>
+   
     {% endfor %}
 </ul>
-{% endif %}
 
 {% endblock %}
