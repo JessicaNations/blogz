@@ -1,34 +1,33 @@
-{% extends "base.html" %}
-
-{% block title %}
-  Signup
-{% endblock %}
+{% extends 'base.html' %}
 
 {% block content %}
-<form method="post">
+
+<h1>Signup</h1>
+  <form action='/signup' method="post">
     <table>
-        <tr>
-            <td><label for="username">Username</label></td>
-            <td>
-                <input name="username" type="text" value="{{ username }}" required>
-                <span class="error">{{ username_error }}</span>
-            </td>
-        </tr>
-        <tr>
-            <td><label for="password">Password</label></td>
-            <td>
-                <input name="password" type="password" required>
-                <span class="error"></span>
-            </td>
-        </tr>
-        <tr>
-            <td><label for="verify">Verify Password</label></td>
-            <td>
-                <input name="verify" type="password" value="{{ verify }}" required>
-                <span class="error">{{ verify_error }}</span>
-            </td>
-        </tr>
+      <tr>
+        <td><label for="username">Username</label></td>
+        <td>
+          <input name="username" type="text" value="{{username}}">
+          <span class="error">{{username_error}}</span>
+        </td>
+      </tr>
+      <tr>
+        <td><label for="password">Password</label></td>
+        <td>
+          <input name="password" type="password">
+          <span class="error">{{password_error}}</span>
+        </td>
+      </tr>
+      <tr>
+        <td><label for="verify">Re-enter Password</label></td>
+        <td>
+          <input name="verify" type="password">
+          <span class="error">{{verify_error}}</span>
+        </td>
+      </tr>
     </table>
-    <input type="submit">
-</form>
+    <input type="submit" value="Create account">
+  </form>
+  
 {% endblock %}

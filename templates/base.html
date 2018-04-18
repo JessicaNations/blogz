@@ -1,16 +1,16 @@
 <!doctype html>
 <html>
     <head>
-        <title>Blogz</title>
-        <link rel="stylesheet" href="/css/normalize.css">
-        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/styles.css') }}">
+        <title>{{title}}</title>
+        <!--<link rel="stylesheet" type= "text/css" href="/css/normalize.css">-->
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/mainpage.css') }}">
     </head>
 
     <body>
 
         <header>
-            <nav>
-              <ul id="user-account">
+            <nav  id="user-account">
+              <ul>
                 <li><a href="/login">login</a></li>
                 <li><a href="/logout">logout</a></li>
               </ul>
