@@ -43,10 +43,11 @@ class Blog(db.Model):
 #root directory just redirects to main blog page
 
 @app.before_request
-def require_login():
+def require_login(): 
     allowed_routes = ['index','blog','login','signup']
     if request.endpoint not in allowed_routes and 'username' not in session:
         return redirect('/login')
+
 
 @app.route('/',  methods=['POST', 'GET'])
 def index():
