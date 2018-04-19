@@ -2,11 +2,10 @@ from flask import Flask, request, redirect, render_template, session, url_for, m
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import os
-import re
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://build-a-blog:YES@localhost:8889/build-a-blog"
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://blogz:password@localhost:8889/blogz"
 app.config["SQLALCHEMY_ECHO"] = True
 db = SQLAlchemy(app)
 
@@ -15,27 +14,24 @@ app.secret_key = '1234abcd'
 class User(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(20))
-    password = db.Column(db.String(50))
-    signup_date = db.Column(db.DateTime)
+    username = db.Column(db.String(100), unique=True)
+    password = db.Column(db.String(20))
+    blogs = db.relationship('Blog', backref='owner')
 
-    def __init__(self, username, password, signup_date=None): #
+    def __init__(self, username, password):
         self.username = username
         self.password = password
-        if signup_date is None:
-            signup_date = datetime.utcnow()
-        self.signup_date = signup_date
-
 
 class Blog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200))
     content = db.Column(db.String(6000))
-   
+    owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __init__(self, title, content):
         self.title = title
         self.content = content
+        self.owner = owner
 
 
 
