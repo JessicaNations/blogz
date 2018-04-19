@@ -2,21 +2,10 @@
 
 {% block content %}
 
-
-{% if view_post != "" %}
-<h1 align="center">{{view_post.title}}</h1>
-<p>{{view_post.content}}<hr></p>
-{% endif %}
-
-{% if view_post == "" %}
-<ul style="list-style: none;">
-    {% for post in posts %}
-    <li>
-        <h2><a href=/blog?id={{post.id}}>{{post.title}}</a></h1>
-        <p>{{post.content}}<hr></p>
-    </li>
-    {% endfor %}
-</ul>
-{% endif %}
+<h2> {{blog.title}} </h2>
+<p>
+    {{blog.content}}
+</p>
+<p><em>written by</em><a href="/blog?user={{blog.owner_id}}">{{blog.owner.username}}</a></p>
 
 {% endblock %}

@@ -28,7 +28,7 @@ class Blog(db.Model):
     content = db.Column(db.String(6000))
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-    def __init__(self, title, content):
+    def __init__(self, title, content, owner):
         self.title = title
         self.content = content
         self.owner = owner
@@ -65,6 +65,14 @@ def blog():
         db.session.add(new_post)
         db.session.commit()
         return redirect("/blog?id="+str(new_post.id))
+    
+    if "user" in request.args:
+        user_id = request.args.get("user")
+        user = User.query.get(user_id)
+        user_blogs = Blog.query.filter_by(owner=user).all()
+        return render_template("singleUser.html", page_title = user.username + "'s Posts!", 
+                                                      user_blogs=user_blogs)
+
     view_post_id = request.args.get("id")
     if view_post_id:
         view_post = Blog.query.get(int(view_post_id))
@@ -74,6 +82,7 @@ def blog():
     posts = Blog.query.order_by(Blog.id.desc()).all()
 
     return render_template("blog.html", posts=posts, view_post=view_post)
+
 
 
 
