@@ -57,29 +57,7 @@ def index():
 @app.route('/blog', methods=['POST','GET'])
 def blog():
 
-    if "user" in request.args:
-        user_id = request.args.get("user")
-        user = User.query.get(user_id)
-        user_blogs = Blog.query.filter_by(owner=user).all()
-        return render_template("singleUser.html", page_title = user.username + "'s Posts!", 
-                                                      user_blogs=user_blogs)
-    
-    single_post = request.args.get("id")
-    if single_post:
-        blog = Blog.query.get(single_post)
-        return render_template("viewpost.html", blog=blog)
-
-    else:
-        blogs = Blog.query.all()
-        return render_template('blog.html', page_title="All Blog Posts!", blogs=blogs)
-    
-
-
-
-
-    
-@app.route('/newpost', methods=['POST', 'GET'])
-def new_post():
+   
     if request.method == "POST":
         new_title = request.form["title"]
         new_content = request.form["content"]
@@ -91,7 +69,6 @@ def new_post():
         db.session.add(new_post)
         db.session.commit()
         return redirect("/blog?id="+str(new_post.id))
-    
     view_post_id = request.args.get("id")
     if view_post_id:
         view_post = Blog.query.get(int(view_post_id))
@@ -101,6 +78,27 @@ def new_post():
     posts = Blog.query.order_by(Blog.id.desc()).all()
 
     return render_template("blog.html", posts=posts, view_post=view_post)
+
+
+
+    
+@app.route('/newpost', methods=['POST', 'GET'])
+def new_post():
+    if request.method == 'GET':
+        return render_template('newpost.html')
+    if request.method == "POST":
+        new_title = request.form["title"]
+        new_content = request.form["content"]
+
+        if not new_title or not new_content:
+            return render_template("newpost.html",title=new_title, content=new_content, error_message="Your post needs content!")
+        owner = User.query.filter_by(username=session['username']).first()
+        new_post = Blog(new_title, new_content, owner) #takes 3 positional arguments, but 4 given
+        db.session.add(new_post)
+        db.session.commit()
+        return redirect("/blog?id="+str(new_post.id))
+   
+    
 
 @app.route("/viewpost", methods=["GET"])
 def view_post():
