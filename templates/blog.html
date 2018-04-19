@@ -14,7 +14,7 @@
  
         <h2><a href=/blog?id={{post.id}}>{{post.title}}</a></h2>
         <p>{{post.content}}</p>
-        <p><strong>Post By: </strong><a href="/blog?user={{blog.owner_id}}">{{blog.owner.username}}</a></p>
+        <p><strong>Post By: </strong><a href="/blog?user={{post_id}}">{{post.username}}</a></p>
         <hr>
    
     {% endfor %}

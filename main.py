@@ -6,7 +6,7 @@ import re
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://blogz:password@localhost:8889/blogz"
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://build-a-blog:YES@localhost:8889/build-a-blog"
 app.config["SQLALCHEMY_ECHO"] = True
 db = SQLAlchemy(app)
 
@@ -72,37 +72,40 @@ def blog():
     else:
         blogs = Blog.query.all()
         return render_template('blog.html', page_title="All Blog Posts!", blogs=blogs)
+    
 
 
+
+
+    
 @app.route('/newpost', methods=['POST', 'GET'])
 def new_post():
+    if request.method == "POST":
+        new_title = request.form["title"]
+        new_content = request.form["content"]
 
-    if request.method == 'GET':
-        return render_template('newpost.html')
+        if not new_title or not new_content:
+            return render_template("newpost.html",title=new_title, content=new_content, error_message="Your post needs content!")
+        owner = User.query.filter_by(username=session['username']).first()
+        new_post = Blog(new_title, new_content, owner)
+        db.session.add(new_post)
+        db.session.commit()
+        return redirect("/blog?id="+str(new_post.id))
+    
+    view_post_id = request.args.get("id")
+    if view_post_id:
+        view_post = Blog.query.get(int(view_post_id))
+    else:
+        view_post = ""
+    
+    posts = Blog.query.order_by(Blog.id.desc()).all()
 
-    if request.method == 'POST':
-        title_entry = request.form['title']
-        body_entry = request.form['body']
-        
-        title_error=''
-        body_error=''
+    return render_template("blog.html", posts=posts, view_post=view_post)
 
-        if len(title_entry) == 0:
-            title_error = "Your Post Needs A Title!"
-        if len(body_entry) == 0:
-            body_error = "Your Post Needs A Body!"
-
-        if title_error or body_error:
-            return render_template('newpost.html', titlebase="New Entry", title_error = title_error, body_error = body_error, title=title_entry, body_name=body_entry)
-
-        else:
-            if len(title_entry) and len(body_entry) > 0:
-                owner = User.query.filter_by(username=session['username']).first()
-                new_entry = Blog(title_entry, body_entry, owner)
-                db.session.add(new_entry)
-                db.session.commit()
-                return redirect("/blog?id=" + str(new_entry.id))
-
+@app.route("/viewpost", methods=["GET"])
+def view_post():
+    return render_template("viewpost.html")
+   
 @app.route("/signup", methods=['GET','POST'])
 def signup():
     username_error = ''
