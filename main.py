@@ -72,7 +72,7 @@ def blog():
         user_blogs = Blog.query.filter_by(owner=user).all()
         return render_template("singleUser.html", page_title = user.username + "'s Posts!", 
                                                       user_blogs=user_blogs)
-
+    
     view_post_id = request.args.get("id")
     if view_post_id:
         view_post = Blog.query.get(int(view_post_id))
@@ -82,10 +82,6 @@ def blog():
     posts = Blog.query.order_by(Blog.id.desc()).all()
 
     return render_template("blog.html", posts=posts, view_post=view_post)
-
-
-
-
     
 @app.route('/newpost', methods=['POST', 'GET'])
 def new_post():
