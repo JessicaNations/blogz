@@ -82,7 +82,24 @@ def blog():
     posts = Blog.query.order_by(Blog.id.desc()).all()
 
     return render_template("blog.html", posts=posts, view_post=view_post)
-    
+
+
+
+
+
+
+
+
+@app.route("/onepost", methods=['POST', 'GET'])
+def show_a_post():
+    post = Post.query.filter_by(post_keyid=request.args.get('onepostid')).first()
+    return render_template('onepost.html', title="This Blog",
+        post=post)
+
+
+
+
+
 @app.route('/newpost', methods=['POST', 'GET'])
 def new_post():
     if request.method == 'GET':

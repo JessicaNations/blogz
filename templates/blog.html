@@ -3,6 +3,11 @@
 {% block content %}
 
     <h1>blog posts!</h1>
+    <hr />
+
+    {% if posts|length == 0 %}
+    <p>No posts yet</p>
+    {% else %}
 
 
 <ul style="list-style: none;">
@@ -15,5 +20,5 @@
    
     {% endfor %}
 </ul>
-
+    {% endif %}
 {% endblock %}
