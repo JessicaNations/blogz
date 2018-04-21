@@ -5,17 +5,17 @@
     <h1>blog posts!</h1>
     <hr />
 
-    {% if posts|length == 0 %}
+    {% if blogs|length == 0 %}
     <p>No posts yet</p>
     {% else %}
 
 
 <ul style="list-style: none;">
-    {% for post in posts %}
+    {% for blog in blogs %}
  
-        <h2><a href=/viewpost?view_post_id={{post.view_post_id}}>{{post.title}}</a></h2>
-        <p>{{post.content}}</p>
-        <p><em>written by </em><a href="/singleUser?view_post_id={{post.owner.id}}">{{post.owner.username}}</a></hp>
+        <h2><a href=/blog?id={{blog.id}}>{{blog.title}}</a></h2>
+        <p>{{blog.content}}</p>
+        <p><em>written by </em><a href="/blog?user={{blog.owner.id}}">{{blog.owner.username}}</a></hp>
         <hr>
    
     {% endfor %}

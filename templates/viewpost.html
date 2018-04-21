@@ -1,18 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-    
-    {% if user_blogs|length == 0 %}
-        <p>No Blog Posts Added</p>
 
-    {% else %}
-        {% for blog in user_blogs|sort(attribute='id', reverse = True) %}
+{% if posts|length == 0 %}
+<p>No posts yet</p>
+{% else %}
 
-        <h2>{{blog.title}}</h2> <!-- <a href="/viewpost?id={{blog.id}}</a>">-->
+
+
+{% for blog in user_blogs %} <!--post in posts-->
+
+         <!-- <a href="/viewpost?id={{blog.id}}</a>">-->
+            <h2>{{blog.title}}</h2>
         <p>{{blog.content}}</p>
-        <p><strong>written by</strong> <a href="/singleUser?user={{blog.owner_id}}">{{blog.owner.username}}</a></p>
+        <p><strong>written by</strong> <a href="/blog?user={{blog.owner_id}}">{{blog.owner.username}}</a></p>
         
-        {% endfor %}
-    {% endif %}
+     
+    {% endfor %}
 
+    {% endif %}
 {% endblock %}

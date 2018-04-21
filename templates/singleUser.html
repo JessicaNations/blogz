@@ -8,9 +8,9 @@
     {% else %}
         {% for blog in user_blogs|sort(attribute='id', reverse = True) %}
 
-        <h2><a href="/blog?id={{blog.id}}">{{blog.title}}</a></h2>
+        <h2><a href="/viewpost?id={{blog.id}}">{{blog.title}}</a></h2>
         <p>{{blog.content}}</p>
-        <p><strong>written by</strong> <a href="/blog?user={{blog.owner_id}}">{{blog.owner.username}}</a></p>
+        <p><em>written by</em> <a href="/blog?user={{blog.owner_id}}">{{blog.owner.username}}</a></p>
         
         {% endfor %}
     {% endif %}

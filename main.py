@@ -70,24 +70,16 @@ def blog():
         user_id = request.args.get("user")
         user = User.query.get(user_id)
         user_blogs = Blog.query.filter_by(owner=user).all()
-        return render_template("singleUser.html", page_title = user.username + "'s Posts!", 
-                                                      user_blogs=user_blogs)
-    if "blog" in request.args:
-        blog_id = request.args.get("viewpost")
-        blog_blogs = Blog.query.get(blog_id)
-        return render_template("viewpost.html", blog_blogs=blog_blogs)
+        return render_template("singleUser.html", page_title = user.username + "'s Posts!", user_blogs=user_blogs)
+    single_post = request.args.get("id")
+    if single_post:
+        blog = Blog.query.get(single_post)
+        return render_template("viewpost.html", blog=blog)                                                
 
-    view_post_id = request.args.get("id")
-    if view_post_id:
-        view_post = Blog.query.get(int(view_post_id))
     else:
-        view_post = ""
+       blogs = Blog.query.all()
+       return render_template('blog.html', page_title="All Blog Posts!", blogs=blogs)
     
-    posts = Blog.query.order_by(Blog.id.desc()).all()
-
-    return render_template("blog.html", posts=posts, view_post=view_post)
-
-
 
 
 
@@ -102,16 +94,14 @@ def new_post():
         if not new_title or not new_content:
             return render_template("newpost.html",title=new_title, content=new_content, error_message="Your post needs content!")
         owner = User.query.filter_by(username=session['username']).first()
-        new_post = Blog(new_title, new_content, owner) #takes 3 positional arguments, but 4 given
+        new_post = Blog(new_title, new_content, owner) 
         db.session.add(new_post)
         db.session.commit()
-        return redirect("/blog?id="+str(new_post.id))
+        return redirect("/viewpost?id="+str(new_post.id)) #or blog?id
    
     
 
-@app.route("/viewpost", methods=["GET"])
-def view_post():
-    return render_template("viewpost.html")
+
    
 @app.route("/signup", methods=['GET','POST'])
 def signup():
