@@ -72,7 +72,11 @@ def blog():
         user_blogs = Blog.query.filter_by(owner=user).all()
         return render_template("singleUser.html", page_title = user.username + "'s Posts!", 
                                                       user_blogs=user_blogs)
-    
+    if "blog" in request.args:
+        blog_id = request.args.get("viewpost")
+        blog_blogs = Blog.query.get(blog_id)
+        return render_template("viewpost.html", blog_blogs=blog_blogs)
+
     view_post_id = request.args.get("id")
     if view_post_id:
         view_post = Blog.query.get(int(view_post_id))
@@ -82,19 +86,6 @@ def blog():
     posts = Blog.query.order_by(Blog.id.desc()).all()
 
     return render_template("blog.html", posts=posts, view_post=view_post)
-
-
-
-
-
-
-
-
-@app.route("/onepost", methods=['POST', 'GET'])
-def show_a_post():
-    post = Post.query.filter_by(post_keyid=request.args.get('onepostid')).first()
-    return render_template('onepost.html', title="This Blog",
-        post=post)
 
 
 

@@ -13,9 +13,9 @@
 <ul style="list-style: none;">
     {% for post in posts %}
  
-        <h2><a href=/blog?id={{post.id}}>{{post.title}}</a></h2>
+        <h2><a href=/viewpost?view_post_id={{post.view_post_id}}>{{post.title}}</a></h2>
         <p>{{post.content}}</p>
-        <p><em>written by </em><a href="/blog?user={{post.owner_id}}">{{post.owner.username}}</a></hp>
+        <p><em>written by </em><a href="/singleUser?view_post_id={{post.owner.id}}">{{post.owner.username}}</a></hp>
         <hr>
    
     {% endfor %}
