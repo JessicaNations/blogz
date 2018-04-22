@@ -10,17 +10,6 @@ db = SQLAlchemy(app)
 
 app.secret_key = '1234abcd'
 
-class User(db.Model):
-
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100), unique=True)
-    password = db.Column(db.String(20))
-    blogs = db.relationship('Blog', backref='owner')
-
-    def __init__(self, username, password):
-        self.username = username
-        self.password = password
-
 class Blog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200))
@@ -32,10 +21,16 @@ class Blog(db.Model):
         self.content = content
         self.owner = owner
 
+class User(db.Model):
 
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(100), unique=True)
+    password = db.Column(db.String(20))
+    blogs = db.relationship('Blog', backref='owner')
 
-#APP ROUTES / HANDLERS
-#root directory just redirects to main blog page
+    def __init__(self, username, password):
+        self.username = username
+        self.password = password
 
 @app.before_request
 def require_login(): 
@@ -66,34 +61,34 @@ def blog():
        blogs = Blog.query.all()
        return render_template('blog.html', page_title="All Blog Posts!", blogs=blogs)
     
-@app.route('/newpost', methods=['POST', 'GET'])
+@app.route("/newpost", methods=["GET"])
 def new_post():
-    if request.method == 'GET':
-        return render_template('newpost.html')
-
+    warning = ""
+    title=""
+    new_post=""
     if request.method == 'POST':
-        title_entry = request.form['title']
-        body_entry = request.form['body']
-        
-        title_error=''
-        body_error=''
-
-        if len(title_entry) == 0:
-            title_error = "Your Post Needs A Title!"
-        if len(body_entry) == 0:
-            body_error = "Your Post Needs A Body!"
-
-        if title_error or body_error:
-            return render_template('newpost.html', titlebase="New Entry", title_error = title_error, body_error = body_error, title=title_entry, body_name=body_entry)
-
+        content = request.form['content']
+        title = request.form['title']
+        owner = User.query.filter_by(username=session['username']).first()
+        if content and title:
+            new_post = Blog(content, title, owner)
+            db.session.add(new_post)
+            db.session.commit()
+            return redirect('/viewpost?id='+str(new_post.id))
         else:
-            if len(title_entry) and len(body_entry) > 0:
-                owner = User.query.filter_by(username=session['username']).first()
-                new_entry = Blog(title_entry, body_entry, owner)
-                db.session.add(new_entry)
-                db.session.commit()
-                return redirect("/blog?id=" + str(new_entry.id))
-   
+            warning="Make sure to include a title and content"
+            new_post=new_post
+            title=title
+
+    
+    return render_template('newpost.html', warning=warning, title=title, new_post=new_post)
+
+@app.route("/viewpost", methods=['POST', 'GET'])
+def show_a_post():
+    blog = Blog.query.filter_by(id=request.args.get('onepostid')).first()
+    return render_template('viewpost.html', title="This Blog",
+        blog=blog)
+
 @app.route("/signup", methods=['GET','POST'])
 def signup():
     username_error = ''
