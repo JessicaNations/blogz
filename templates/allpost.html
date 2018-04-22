@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
+<h1>blog posts!</h1>
+<hr />
 
-{% for post in user_posts %}
+{% for post in all_posts %}
     <div class='blog'>
         <div class='post-title'>
             <a href='/blog?id={{ post.id }}'>{{ post.title }}</a>

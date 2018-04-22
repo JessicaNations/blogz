@@ -2,22 +2,19 @@
 
 {% block content %}
 
+<h1>new post</h1>
+    <form method='POST' name='new_post'>
+        <label>
+            title
+            <input type='text' name='title' size='50' value='{{ title }}'/>
+        </label>
+        <br>
+        <label>
+        	post
+        	<textarea name='content' rows='10' cols='50' placeholder="What's on your mind?">{{ content }}</textarea>
+        </label>
+        <input type='submit' value='Submit'>
+    </form>
     
-<h1 align="center">Add a Blog Entry</h1>
-<form method="POST" action="/blog">
-
-    <label for="title">Title for your new blog:</label>
-    
-    <input name="title" id="title" type="text" value="{{title}}"/>
-    <!--<p class="error">{{title_error}}</p>-->
-
-    <label for="content">Your new blog:</label>
-    
-    <textarea name="content" id="content" type="text" value="{{content}}"></textarea>
-    <!--<p class="error">{{content_error}}</p>-->
-<br>
-    <input type="submit" value="Post Entry"/>
-</form>
-<p>{{error_message}}</p>
 
 {% endblock %}

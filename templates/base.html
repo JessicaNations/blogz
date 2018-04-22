@@ -1,32 +1,37 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
     <head>
         <title>{{title}}</title>
-        <!--<link rel="stylesheet" type= "text/css" href="/css/normalize.css">-->
-        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/mainpage.css') }}">
+      <!-- <style>-->
+            <link rel="stylesheet" href="/static/styles/normalize.css">
+            <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/mainpage.css') }}">
+        <!-- </style> -->
     </head>
-
     <body>
-
-        <header>
-            <nav>
-              <ul id="user-account">
+        <nav>
+            <ul id="user-account">
                 <li><a href="/login">login</a></li>
                 <li><a href="/logout">logout</a></li>
-              </ul>
-              <ul>
+            </ul>
+            <ul>
                 <li><a href="/">home</a></li>
                 <li><a href="/blog">all posts</a></li>
                 <li><a href="/newpost">new post</a></li>
-              </ul>
-            </nav>
+            </ul>
+            <p>Current user is {{ session.username }}</p>
+
+        </nav>
         
-            <h1>{% block title %}{% endblock %}</h1>
-          </header>
-        
+        {% with messages = get_flashed_messages(with_categories=True) %}
+        <ul>
+            {% for category,message in messages %}
+                <li class="error">{{message}}</li>
+            {% endfor %}
+        </ul>
+        {% endwith %}
 
         {% block content %}
+
         {% endblock %}
-        
     </body>
 </html>
