@@ -50,7 +50,7 @@ def blog():
         user_id = request.args.get("user")
         user = User.query.get(user_id)
         user_blogs = Blog.query.filter_by(owner=user).all()
-        return render_template("singleUser.html", page_title = user.username + "'s Posts!", user_blogs=user_blogs)
+        return render_template("singleUser.html", page_title = user.username, user_blogs=user_blogs)
    
     single_post = request.args.get("id")
     if single_post:
@@ -59,35 +59,16 @@ def blog():
 
     else:
        blogs = Blog.query.all()
-       return render_template('blog.html', page_title="All Blog Posts!", blogs=blogs)
+       return render_template('blog.html', blogs=blogs)
     
 @app.route("/newpost", methods=["GET"])
 def new_post():
-    warning = ""
-    title=""
-    new_post=""
-    if request.method == 'POST':
-        content = request.form['content']
-        title = request.form['title']
-        owner = User.query.filter_by(username=session['username']).first()
-        if content and title:
-            new_post = Blog(content, title, owner)
-            db.session.add(new_post)
-            db.session.commit()
-            return redirect('/viewpost?id='+str(new_post.id))
-        else:
-            warning="Make sure to include a title and content"
-            new_post=new_post
-            title=title
-
+    return render_template("newpost.html")
     
-    return render_template('newpost.html', warning=warning, title=title, new_post=new_post)
-
 @app.route("/viewpost", methods=['POST', 'GET'])
 def show_a_post():
     blog = Blog.query.filter_by(id=request.args.get('onepostid')).first()
-    return render_template('viewpost.html', title="This Blog",
-        blog=blog)
+    return render_template('viewpost.html', blog=blog)
 
 @app.route("/signup", methods=['GET','POST'])
 def signup():
