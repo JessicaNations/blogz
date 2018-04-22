@@ -1,7 +1,6 @@
-from flask import Flask, request, redirect, render_template, session, url_for, make_response
+from flask import Flask, request, redirect, render_template, session
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
-import os
+
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -51,26 +50,13 @@ def index():
     return render_template('index.html', users=users)
 
 @app.route('/blog', methods=['POST','GET'])
-def blog():
-
-   
-    if request.method == "POST":
-        new_title = request.form["title"]
-        new_content = request.form["content"]
-
-        if not new_title or not new_content:
-            return render_template("newpost.html",title=new_title, content=new_content, error_message="Your post needs content!")
-        owner = User.query.filter_by(username=session['username']).first()
-        new_post = Blog(new_title, new_content, owner)
-        db.session.add(new_post)
-        db.session.commit()
-        return redirect("/blog?id="+str(new_post.id))
-    
+def blog():   
     if "user" in request.args:
         user_id = request.args.get("user")
         user = User.query.get(user_id)
         user_blogs = Blog.query.filter_by(owner=user).all()
         return render_template("singleUser.html", page_title = user.username + "'s Posts!", user_blogs=user_blogs)
+   
     single_post = request.args.get("id")
     if single_post:
         blog = Blog.query.get(single_post)
@@ -80,28 +66,33 @@ def blog():
        blogs = Blog.query.all()
        return render_template('blog.html', page_title="All Blog Posts!", blogs=blogs)
     
-
-
-
 @app.route('/newpost', methods=['POST', 'GET'])
 def new_post():
     if request.method == 'GET':
         return render_template('newpost.html')
-    if request.method == "POST":
-        new_title = request.form["title"]
-        new_content = request.form["content"]
 
-        if not new_title or not new_content:
-            return render_template("newpost.html",title=new_title, content=new_content, error_message="Your post needs content!")
-        owner = User.query.filter_by(username=session['username']).first()
-        new_post = Blog(new_title, new_content, owner) 
-        db.session.add(new_post)
-        db.session.commit()
-        return redirect("/viewpost?id="+str(new_post.id)) #or blog?id
-   
-    
+    if request.method == 'POST':
+        title_entry = request.form['title']
+        body_entry = request.form['body']
+        
+        title_error=''
+        body_error=''
 
+        if len(title_entry) == 0:
+            title_error = "Your Post Needs A Title!"
+        if len(body_entry) == 0:
+            body_error = "Your Post Needs A Body!"
 
+        if title_error or body_error:
+            return render_template('newpost.html', titlebase="New Entry", title_error = title_error, body_error = body_error, title=title_entry, body_name=body_entry)
+
+        else:
+            if len(title_entry) and len(body_entry) > 0:
+                owner = User.query.filter_by(username=session['username']).first()
+                new_entry = Blog(title_entry, body_entry, owner)
+                db.session.add(new_entry)
+                db.session.commit()
+                return redirect("/blog?id=" + str(new_entry.id))
    
 @app.route("/signup", methods=['GET','POST'])
 def signup():
