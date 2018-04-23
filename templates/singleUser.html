@@ -2,15 +2,11 @@
 
 {% block content %}
 
-{% for post in user_posts %}
-    <div class='blog'>
-        <div class='post-title'>
-            <a href='/blog?id={{ post.id }}'>{{ post.title }}</a>
-        </div>
-        <div class='post-content'>{{ post.content }}</div>
+{% for post in user_posts|sort(attribute='id', reverse = True) %}
+        <h2><a href='/blog?id={{ post.id }}'>{{ post.title }}</a></h2>
+        <p>{{ post.content }}</p>
         <div><em>written by </em><a href='blog?username={{ post.owner.username }}'>{{ post.owner.username }}</a></div>
-        <hr />
-    </div>
+        
 {% endfor %}
 
 {% endblock %}

@@ -101,7 +101,7 @@ def signup():
 
         #validate username
         if not username:
-            username_error='Please enter your username'
+            username_error='username required'
             have_error=True
 
         if ' ' in username:
@@ -114,7 +114,7 @@ def signup():
         
         #validate password
         if not password:
-            password_error='You must enter a password'
+            password_error='password required'
             have_error=True
 
         if ' ' in password:
@@ -150,11 +150,10 @@ def blog_total():
         return render_template('allpost.html', all_posts=all_posts)
 
     if request.method == 'GET' and request.args.get('username'):
-        username = request.args.get('username')
-        user_id = User.query.get(username) #removed quotes
+        username = request.args.get("username")
+        user_id = User.query.get(username)
         user_posts = Blog.query.filter_by(owner_id=user_id).all()
-        return render_template('singleuser.html', user_posts=user_posts)
-    #changed singlepost to singleuser and it's being weird. 
+        return render_template("singleuser.html", user_posts=user_posts)
    
     else:
         all_posts=Blog.query.order_by(Blog.id).all()
@@ -177,9 +176,9 @@ def new_post():
         owner = User.query.filter_by(username=session['username']).first()
 
         if not title:
-            title_error = "Please fill out the title"
+            title_error = "title required"
         if not content:
-            content_error = "Please fill out the body"
+            content_error = "text required"
         if not title_error and not content_error:
             title = title
             content = content
@@ -194,7 +193,7 @@ def new_post():
             id = str(id)
             return redirect('/blog?id='+id)
         else:
-            flash("We need a title and text in the body of the post")
+            flash("title and text required")
             return render_template('newpost.html',title=title,content=content,title_error=title_error,content_error=content_error)
     else:
         title=''
