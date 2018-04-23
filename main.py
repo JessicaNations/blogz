@@ -79,11 +79,6 @@ def login():
 
 @app.route('/signup', methods=['POST','GET'])
 def signup():
-   # '''if request.method=='GET':
-    #    return render_template('signup.html')
-     #   '''
-        
-
     if request.method=='POST':
         username=request.form['username']
         password=request.form['password']
@@ -96,7 +91,7 @@ def signup():
 
         #validate if existing user
         if existing_user:
-            username_error='That username is already registered for a user'
+            username_error='username already registered for a user'
             return render_template('signup.html',username=username,username_error=username_error)
 
         #validate username
@@ -105,11 +100,11 @@ def signup():
             have_error=True
 
         if ' ' in username:
-            username_error='Spaces not allowed'
+            username_error='No blank spaces'
             have_error=True
         
         if len(username) <3 or len(username) >20:
-                username_error='Username must be between 3 & 20 characters long, no blank spaces allowed'
+                username_error='Username must contain 3-20 characters and no blank spaces'
                 have_error=True
         
         #validate password
@@ -118,11 +113,11 @@ def signup():
             have_error=True
 
         if ' ' in password:
-            password_error='No blank spaces in password'
+            password_error='No blank spaces'
             have_error=True
 
         if len(password)<3 or len(password)>20:
-                password_error='Password must be between 3 & 20 characters long, no blank spaces allowed'
+                password_error='Password must contain 3-20 characters and no blank spaces'
                 have_error=True
         
         #validate verify
@@ -158,13 +153,6 @@ def blog_total():
     else:
         all_posts=Blog.query.order_by(Blog.id).all()
         return render_template('allpost.html', all_posts=all_posts)
-
-'''@app.route('/newpost')
-def display_newpost_form():
-    title=''
-    content=''
-    return render_template('newpost.html',title=title,content=content)
-    '''
 
 @app.route('/newpost', methods=['POST', 'GET'])
 def new_post():

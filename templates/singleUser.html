@@ -1,12 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% if user_blogs|length == 0 %}
+<p>No Blog Posts Added</p>
+
+{% else %}
 
 {% for post in user_posts|sort(attribute='id', reverse = True) %}
         <h2><a href='/blog?id={{ post.id }}'>{{ post.title }}</a></h2>
         <p>{{ post.content }}</p>
-        <div><em>written by </em><a href='blog?username={{ post.owner.username }}'>{{ post.owner.username }}</a></div>
+        <div><em>written by </em><a href='/blog?user={{ post.owner_id }}'>{{ post.owner.username }}</a></div>
         
 {% endfor %}
-
+{% endif %}
 {% endblock %}
