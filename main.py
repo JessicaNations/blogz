@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, render_template, session, flash
+from flask import Flask, request, redirect, render_template, session, flash, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -144,16 +144,16 @@ def blog_total():
         all_posts = Blog.query.filter_by(id=id).all()
         return render_template('allpost.html', all_posts=all_posts)
 
-    if request.method == 'GET' and request.args.get('username'):
-        username = request.args.get("username")
-        user_id = User.query.get(username)
-        user_posts = Blog.query.filter_by(owner_id=user_id).all()
-        return render_template("singleuser.html", user_posts=user_posts)
+    if request.method == 'GET' and request.args.get('user'):
+        owner_id = request.args.get("user")
+        username = User.query.get(owner_id)
+        user_posts = Blog.query.filter_by(owner_id=owner_id).order_by('id DESC').all() #Blog.query.filter_by(owner=user).all()
+        return render_template("singleuser.html", user_posts=user_posts, user=username)#user_posts=user_posts
    
     else:
         all_posts=Blog.query.order_by(Blog.id).all()
         return render_template('allpost.html', all_posts=all_posts)
-
+        
 @app.route('/newpost', methods=['POST', 'GET'])
 def new_post():
     if request.method == 'POST':
