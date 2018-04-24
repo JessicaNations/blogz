@@ -2,15 +2,15 @@
 <html>
     <head>
         <title>{{title}}</title>
-      <style>
+    
           
-            <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/normalize.css') }}">
-            <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/mainpage.css') }}">
-        </style> 
+            <link rel="stylesheet" href="{{ url_for('static',filename='css/normalize.css') }}">
+            <link rel="stylesheet" href="{{ url_for('static',filename='css/styles.css') }}">
+        
     </head>
     <body>
         <nav>
-            <ul id="user-account">
+            <ul style="float:right;">
                 <li><a href="/login">login</a></li>
                 <li><a href="/logout">logout</a></li>
             </ul>

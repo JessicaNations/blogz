@@ -5,7 +5,7 @@
 {% for post in user_posts %}
     
         
-           <h2><a href='/blog?id={{ post.id }}'>{{ post.title }}</a></h2>
+           <h2>{{ post.title }}</h2>
         
         <p>{{ post.content }}</p>
         <div><em>written by </em><a href="/blog?user={{post.owner_id}}">{{post.owner.username}}</a></div>
