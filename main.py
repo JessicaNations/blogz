@@ -42,10 +42,10 @@ def logout():
     del session['username']
     return redirect('/')
 
-@app.route('/',  methods=['POST', 'GET'])
+@app.route('/user',  methods=['POST', 'GET'])
 def index():
     users = User.query.all()
-    return render_template('index.html', users=users)
+    return render_template('user.html', users=users)
 
 @app.route('/login', methods=['POST','GET'])
 def login():
@@ -195,6 +195,10 @@ def single_post():
     singlepost="?id="+ post_ided
     print(singlepost)
     return redirect('/blog{singlepost}' .format(singlepost=singlepost))
+
+@app.route('/')
+def home():
+    return render_template('index.html')
 
 @app.route('/events',)
 def calendar():

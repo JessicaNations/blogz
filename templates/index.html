@@ -1,14 +1,51 @@
-{% extends 'base.html' %}
+  {% extends "base.html" %}
 
 {% block content %}
 
-<h1>blog users!</h1>
-
-{% for user in users %}
-
-  <ul>
-    <li><a href="/blog?user={{user.id}}">{{user.username}}</a></li>
-  </ul>
-
-{% endfor %}
-{% endblock %}
+<!-- slideshow -->
+      <div id="home">
+    <div class="mySlides w3-display-container w3-center">
+        <img src="img/peacock.jpg" style="width:100%">
+      </div>  
+    <div class="mySlides w3-display-container w3-center">
+        <img src="img/calf.jpg" style="width:100%">
+      </div> 
+    <div class="mySlides w3-display-container w3-center">
+        <img src="img/porcupine.jpg" style="width:100%">
+      </div> 
+      <div class="mySlides w3-display-container w3-center">
+            <img src="img/camel.jpg" style="width:100%">
+          </div> 
+          <div class="mySlides w3-display-container w3-center">
+                <img src="img/goats.jpg" style="width:100%">
+              </div> 
+              <div class="mySlides w3-display-container w3-center">
+                    <img src="img/snake.jpg" style="width:100%">
+                  </div> 
+              <div class="mySlides w3-display-container w3-center">
+                    <img src="img/sign.jpg" style="width:100%">
+                  </div>                  
+    <div class="w3-display-left w3-text-white" style="padding:48px">      
+    <span class="w3-jumbo w3-hide-small">Not your typical petting zoo</span><br>
+    <span class="w3-xxlarge w3-hide-large w3-hide-medium">Not your typical petting zoo</span><br>
+    <span class="w3-large">Come and see all types of animals from mild to wild.</span>
+    <p><a href="#events" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Plan your visit</a></p>
+  </div> 
+  </div>
+  <script>
+        var myIndex = 0;
+        carousel();
+        
+        function carousel() {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            for (i = 0; i < x.length; i++) {
+               x[i].style.display = "none";  
+            }
+            myIndex++;
+            if (myIndex > x.length) {myIndex = 1}    
+            x[myIndex-1].style.display = "block";  
+            setTimeout(carousel, 2000); // Change image every 2 seconds
+        }
+        </script>
+        {% endblock %}
