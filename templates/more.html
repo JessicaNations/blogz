@@ -1,0 +1,54 @@
+  {% extends "base.html" %}
+
+{% block content %}
+
+
+<!-- More to do Section -->
+<div class="w3-container w3-center" style="padding:128px 16px" id="more">
+    <h3>Things to do and see</h3>
+    <p class="w3-large">In addition to our more than 500 animals residents covering well over 60 species and growing, these are some of our other fun attractions here at the Safari.</p>
+    <button onclick="myFunction('camel')" class="w3-button w3-block w3-left-align w3-black">
+        Camel Rides <i class="fa fa-caret-down"></i></button>
+        
+        <div id="camel" class="w3-container w3-hide">
+            <ul class="w3-ul">
+                <li>$5.00 per rider</li></ul> 
+        <p>Saturdays 10:30 am to 3:30 pm and Sundays 11:30 to 4:00 throughout the entire season and all open days during the summer.</p> 
+        <p><em>Weather permitting and you can check for availability on facebook for any possible cancellations</em></p>
+        <h5>​Ride Requirements​</h5>
+        <ul>
+          <li>More than one person can ride, but there is a 250 lb weight limit</li>
+        <li>​Sorry no children under the age of 2 may ride</li>
+        <li>Children 2-3 years of age may ride with a parent</li>
+        <li>Each Rider must buy a ride ticket (child + adult= 2 ride tickets)</li>
+        </ul></div>
+        <br>
+        <button onclick="myFunction('pony')" class="w3-button w3-block w3-left-align w3-black">
+            Pony and Donkey Rides <i class="fa fa-caret-down"></i></button>
+            <div id="pony" class="w3-container w3-hide">
+        ​<h5>Pony Ride times are the same as the camel ride schedule above. $5.00 per rider</h5> 
+        <h5>​Ride Requirements</h5>
+        <ul>
+        ​<li>Must be 2 years old to ride</li>
+        <li>Younger riders may require a parent to walk along side pony</li>
+        <li>Rider must be under 80 lbs Parakeet Encounter</li>
+        </ul></div>
+        <br>
+        <button onclick="myFunction('bird')" class="w3-button w3-block w3-left-align w3-black">
+            Parakeet Encounter <i class="fa fa-caret-down"></i></button>
+            
+            <div id="bird" class="w3-container w3-hide">
+        <p>Feed our many fine feathered friends in our open bird aviary and many will actually land on your stick, hand, and even your head!</p>
+        </div>
+        <br>
+        <button onclick="myFunction('Stl')" class="w3-button w3-block w3-left-align w3-black">
+            Education Station <i class="fa fa-caret-down"></i></button>
+            
+            <div id="Stl" class="w3-container w3-hide">
+        <p>Learn some cool facts about animals and about us. Touch animal artifacts such as ostrich eggs and deer antlers. You can even touch one of our animal ambassadors such as a snake, alligator, or other animal friends! Weekends in the Spring and Fall and everyday for the summer time. This is a free activity that is available 1 hour after opening until 1 hour before closing and is weather permitting of course.</p>
+        <h4>Fall Safari Activities and Wagon Rides (Seasonal)</h4>
+        <p>Fall time is park owners Big Joel and Mimi's favorite time of the year. During this time of the year the park is decorated for the Halloween and Fall season, transforming Big Joel's Safari into Big Joel's Spooky Safari! Beginning at the end of September and operating regular days of operation until Halloween. During this time we offer wagon rides that operate every day we are open. We take you one full round in our old hay wagon with our trusty old tractor in our large field which is home most of our deer, elk, bison, and watusi cattle as well as our many ducks and geese. During the ride our ride operator will inform you about our animal residents and facts about Big Joel's Safari. Tickets are $2.50 per rider (under 2 years of age are free)</p>
+        </div>
+        <br>
+        </div>
+         {% endblock %}

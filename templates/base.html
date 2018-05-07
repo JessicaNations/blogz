@@ -1,28 +1,110 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>{{title}}</title>
-    
-          
-            <link rel="stylesheet" href="{{ url_for('static',filename='css/normalize.css') }}">
-            <link rel="stylesheet" href="{{ url_for('static',filename='css/styles.css') }}">
+    <link rel="icon" />
+        <title> Big Joel's Safari</title>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-green.css">
+            <link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16" />
+            <link rel="stylesheet" href="{{ url_for('static',filename='css/normalize.css') }}"/>
+            <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}"/><!--<lnk rel="stylesheet" href="css/style.css">-->
         
     </head>
     <body>
-        <nav>
-            <ul style="float:right;">
-                <li><a href="/login">login</a></li>
-                <li><a href="/logout">logout</a></li>
-            </ul>
-            <ul>
-                <li><a href="/">home</a></li>
-                <li><a href="/blog">all posts</a></li>
-                <li><a href="/newpost">new post</a></li>
-            </ul>
-            <p>Current user is {{ session.username }}</p>
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+        <div class="w3-bar w3-white w3-card" id="myNavbar">
+                <a href="/" class="w3-bar-item w3-button w3-wide">Big Joel's Safari</a>
+                <!-- Right-sided navbar links -->
+        <div class="w3-left w3-hide-small">
+                <a href="/about"><div class="w3-dropdown-hover"><button class="w3-button"> ABOUT</button></a>
+              <div class="w3-dropdown-content w3-bar-block w3-card-5">
+                <a href="/mission" class="w3-bar-item w3-button">MISSION</a>
+                <a href="/blog" class="w3-bar-item w3-button">BLOG</a>
+                <a href="/newpost" class="w3-bar-item w3-button">ADD A POST</a>
+                <a href="/employment" class="w3-bar-item w3-button">EMPLOYMENT</a>
+                <a href="/contact" class="w3-bar-item w3-button">CONTACT US</a>
+              </div>
+              </div>
+                <a href="/pricing"><div class="w3-dropdown-hover"><button class="w3-button"> VISIT</button></a>
+              <div class="w3-dropdown-content w3-bar-block w3-card-7">
+                <a href="/events" class="w3-bar-item w3-button">HOURS</a>
+                <a href="/pricing" class="w3-bar-item w3-button">PRICES</a>
+                <a href="/direct" class="w3-bar-item w3-button">DIRECTIONS</a>
+                <a href="/faq" class="w3-bar-item w3-button">FAQ</a>
+                <a href="/more" class="w3-bar-item w3-button">THINGS TO DO AND SEE</a>
+                <a href="/policies" class="w3-bar-item w3-button">ZOO SERVICES AND POLICIES</a>
+                <a href="/events" class="w3-bar-item w3-button">GROUP VISITS</a>
+              </div>
+              </div>
+                <a href="/education"><div class="w3-dropdown-hover"><button class="w3-button"> EDUCATION</button></a>
+              <div class="w3-dropdown-content w3-bar-block w3-card-1">
+                <a href="/about" class="w3-bar-item w3-button">PROGRAMS FOR STUDENTS</a>
+              </div>
+              </div>
+                <a href="/events"><div class="w3-dropdown-hover"><button class="w3-button"> EVENTS</button></a>
+              <div class="w3-dropdown-content w3-bar-block w3-card-2">
+                <a href="/events" class="w3-bar-item w3-button">CALENDAR</a>
+                <a href="/events" class="w3-bar-item w3-button">BIRTHDAY PARTIES</a>
+                 </div>
+                 </div>
+                 <input type="text" class="w3-bar-item w3-input" placeholder="Search..">
+                 <a href="#" class="w3-bar-item w3-button w3-green">Go</a>
+            
+                <a href="/login">login <i class="fa fa-user"></i></a>
+                <a href="/logout">logout {{ session.username }}<i class="fa fa-user"></i></a>
+                </div>
+                    <!-- Hide right-floated links on small screens and replace them with a menu icon -->
 
-        </nav>
-        
+    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
+            <i class="fa fa-bars"></i>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Sidebar on small screens when clicking the menu icon -->
+      <nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
+        <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
+            <a href="/about" onclick="w3_close()"><div class="w3-dropdown-hover"><button class="w3-button"> ABOUT</button></a>
+          <div class="w3-dropdown-content w3-bar-block w3-card-5">
+            <a href="/mission" class="w3-bar-item w3-button">MISSION</a>
+            <a href="/employment" class="w3-bar-item w3-button">EMPLOYMENT</a>
+            <a href="/about" class="w3-bar-item w3-button">VOLUNTEER</a>
+            <a href="/contact" class="w3-bar-item w3-button">BLOG</a>
+            <a href="/contact" class="w3-bar-item w3-button">CONTACT US</a>
+          </div>
+          </div>
+            <a href="/pricing" onclick="w3_close()"><div class="w3-dropdown-hover"><button class="w3-button"> VISIT</button></a>
+          <div class="w3-dropdown-content w3-bar-block w3-card-7">
+            <a href="/events" class="w3-bar-item w3-button">HOURS</a>
+            <a href="/pricing" class="w3-bar-item w3-button">PRICES</a>
+            <a href="/direct" class="w3-bar-item w3-button">DIRECTIONS</a>
+            <a href="/faq" class="w3-bar-item w3-button">FAQ</a>
+            <a href="/more" class="w3-bar-item w3-button">THINGS TO DO AND SEE</a>
+            <a href="/policies" class="w3-bar-item w3-button">ZOO SERVICES AND POLICIES</a>
+            <a href="/events" class="w3-bar-item w3-button">GROUP VISITS</a>
+          </div>
+          </div>
+            <a href="/education" onclick="w3_close()"><div class="w3-dropdown-hover"><button class="w3-button"> EDUCATION</button></a>
+          <div class="w3-dropdown-content w3-bar-block w3-card-1">
+            <a href="/about" class="w3-bar-item w3-button">PROGRAMS FOR STUDENTS</a>
+          </div>
+          </div>
+            <a href="/events" onclick="w3_close()"><div class="w3-dropdown-hover"><button class="w3-button"> EVENTS</button></a>
+          <div class="w3-dropdown-content w3-bar-block w3-card-2">
+            <a href="/events" class="w3-bar-item w3-button">CALENDAR</a>
+            <a href="/events" class="w3-bar-item w3-button">BIRTHDAY PARTIES</a>
+             </div>
+             </div>
+             <input type="text" class="w3-bar-item w3-input" placeholder="Search..">
+            <div class="w3-right w3-xlarge">
+            <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-green">Go</a>
+          </div>
+          </div>
+      </nav>
         {% with messages = get_flashed_messages(with_categories=True) %}
         <ul>
             {% for category,message in messages %}

@@ -32,7 +32,7 @@ class Blog(db.Model):
 
 @app.before_request
 def require_login():
-    safe_routes = ['index','blog_total','login','signup']
+    safe_routes = ['index','blog_total','login','signup', 'events', 'contact', 'mission', 'newsletter', 'education', 'direct', 'policies', 'employment', 'pricing', 'more', 'faq']
     if 'username' not in session:
         if request.endpoint not in safe_routes: 
                 return redirect('/login')
@@ -195,6 +195,50 @@ def single_post():
     singlepost="?id="+ post_ided
     print(singlepost)
     return redirect('/blog{singlepost}' .format(singlepost=singlepost))
+
+@app.route('/events',)
+def calendar():
+    return render_template('events.html')
+
+@app.route('/education')
+def education():
+    return render_template('education.html')
+
+@app.route('/direct')
+def directions():
+    return render_template('direct.html')
+
+@app.route('/faq')
+def faq():
+    return render_template('faq.html')
+
+@app.route('/more')
+def more():
+    return render_template('more.html')
+
+@app.route('/pricing')
+def pricing():
+    return render_template('pricing.html')
+
+@app.route('/policies')
+def policies():
+    return render_template('policies.html')
+
+@app.route('/employment')
+def employment():
+    return render_template('employment.html')
+
+@app.route('/mission')
+def mission():
+    return render_template('mission.html')
+
+@app.route('/newsletter')
+def newsletter():
+    return render_template('newsletter.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')    
 
 if __name__ == '__main__':
     app.run()

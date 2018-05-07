@@ -1,8 +1,15 @@
-body {
-    font-family: sans-serif;
-    width: 800px;
-    margin: 0 auto;
-    padding: 10px;
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+body, html {
+    height: 100%;
+    line-height: 1.8;
+}
+.w3-bar .w3-button {
+    padding: 16px;
+}
+* {box-sizing: border-box;}
+.mySlides {display:none;}
+#events {
+  background: #e3e9ff
 }
 
 .error {
