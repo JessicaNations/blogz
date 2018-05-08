@@ -232,9 +232,9 @@ def policies():
 def employment():
     return render_template('employment.html')
 
-@app.route('/mission')
+@app.route('/about')
 def mission():
-    return render_template('mission.html')
+    return render_template('about.html')
 
 @app.route('/newsletter')
 def newsletter():

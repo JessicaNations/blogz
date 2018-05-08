@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-    <link rel="icon" />
+    <img rel="icon" />
         <title> Big Joel's Safari</title>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,21 +8,20 @@
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
             <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-green.css">
-            <link rel="icon" type="image/png" href="{{ url_for('static',filename='img/favicon-16x16.png') }}" sizes="16x16" />
-            <link rel="stylesheet" href="{{ url_for('static',filename='css/normalize.css') }}"/>-->
-            <!--<link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}"/><!--<lnk rel="stylesheet" href="css/style.css">-->
+            <img rel="icon" type="image/png" src="img/favicon-16x16.png" sizes="16x16" />
+            <!--<link rel="stylesheet" href="{{ url_for('static',filename='css/normalize.css') }}"/>-->
+            <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}"/><!--<lnk rel="stylesheet" href="css/style.css">-->
         
-    </head>
-    <body>
+        <body>
 <!-- Navbar (sit on top) -->
 <div class="w3-top">
         <div class="w3-bar w3-white w3-card" id="myNavbar">
                 <a href="/" class="w3-bar-item w3-button w3-wide">Big Joel's Safari</a>
                 <!-- Right-sided navbar links -->
-        <div class="w3-left w3-hide-small">
+        <div class="w3-right w3-hide-small">
                 <a href="/about"><div class="w3-dropdown-hover"><button class="w3-button"> ABOUT</button></a>
               <div class="w3-dropdown-content w3-bar-block w3-card-5">
-                <a href="/mission" class="w3-bar-item w3-button">MISSION</a>
+                <a href="/about" class="w3-bar-item w3-button"> ABOUT US</a>
                 <a href="/blog" class="w3-bar-item w3-button">BLOG</a>
                 <a href="/newpost" class="w3-bar-item w3-button">ADD A POST</a>
                 <a href="/index" class="w3-bar-item w3-button">USER INDEX</a>
@@ -43,7 +42,7 @@
               </div>
                 <a href="/education"><div class="w3-dropdown-hover"><button class="w3-button"> EDUCATION</button></a>
               <div class="w3-dropdown-content w3-bar-block w3-card-1">
-                <a href="/about" class="w3-bar-item w3-button">PROGRAMS FOR STUDENTS</a>
+                <a href="/education" class="w3-bar-item w3-button">PROGRAMS FOR STUDENTS</a>
               </div>
               </div>
                 <a href="/events"><div class="w3-dropdown-hover"><button class="w3-button"> EVENTS</button></a>
@@ -55,11 +54,9 @@
                  <!--<input type="text" class="w3-bar-item w3-input" placeholder="Search..">
                  <a href="#" class="w3-bar-item w3-button w3-green">Go</a>-->
               
-                <a href="/login"><div class="w3-bar-item w3-button w3-right"><button class="w3-button">login <i class="fa fa-user w3-xlarge"></i></button></a>
-                <a href="/logout"><div class="w3-bar-item w3-button w3-right"><button class="w3-button">logout {{ session.username }}<i class="fa fa-user w3-xlarge"></i></button></a>
-                </div>
-                </div>
-              </div>
+                <a href="/login" class="w3-bar-item w3-button"><i class="fa fa-user"></i> login</a>
+                <a href="/logout" class="w3-bar-item w3-button"><i class="fa fa-user"></i> logout {{ session.username }}</a>
+              
                     <!-- Hide right-floated links on small screens and replace them with a menu icon -->
 
     <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
@@ -73,7 +70,7 @@
         <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
             <a href="/about" onclick="w3_close()"><div class="w3-dropdown-hover"><button class="w3-button"> ABOUT</button></a>
           <div class="w3-dropdown-content w3-bar-block w3-card-5">
-            <a href="/mission" class="w3-bar-item w3-button">MISSION</a>
+            <a href="/about" class="w3-bar-item w3-button">ABOUT US</a>
             <a href="/employment" class="w3-bar-item w3-button">EMPLOYMENT</a>
             <a href="/about" class="w3-bar-item w3-button">VOLUNTEER</a>
             <a href="/contact" class="w3-bar-item w3-button">BLOG</a>
@@ -93,7 +90,7 @@
           </div>
             <a href="/education" onclick="w3_close()"><div class="w3-dropdown-hover"><button class="w3-button"> EDUCATION</button></a>
           <div class="w3-dropdown-content w3-bar-block w3-card-1">
-            <a href="/about" class="w3-bar-item w3-button">PROGRAMS FOR STUDENTS</a>
+            <a href="/education" class="w3-bar-item w3-button">PROGRAMS FOR STUDENTS</a>
           </div>
           </div>
             <a href="/events" onclick="w3_close()"><div class="w3-dropdown-hover"><button class="w3-button"> EVENTS</button></a>
@@ -102,11 +99,13 @@
             <a href="/events" class="w3-bar-item w3-button">BIRTHDAY PARTIES</a>
              </div>
              </div>
-             <input type="text" class="w3-bar-item w3-input" placeholder="Search..">
+             <!--<input type="text" class="w3-bar-item w3-input" placeholder="Search..">
             <div class="w3-right w3-xlarge">
             <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-green">Go</a>
           </div>
-          </div>
+          </div>-->
+          <a href="/login" onclick="w3_close()" class="w3-bar-item w3-button"><i class="fa fa-user"></i> login</a>
+                <a href="/logout" onclick="w3_close()" class="w3-bar-item w3-button"><i class="fa fa-user"></i> logout {{ session.username }}</a>
       </nav>
         {% with messages = get_flashed_messages(with_categories=True) %}
         <ul>
@@ -120,7 +119,7 @@
 
         {% endblock %}
     </body>
-    <!-- Footer Grid -->
+    <!-- Footer Grid 
 
   
     <div class="w3-quarter w3-container w3-dark-grey w3-center"><p><h2>VISIT</h2>
@@ -133,29 +132,29 @@
       <ul class="w3-ul">
       <li><a href="#events">Book your event</a></li>
       <li><a href="#about">Education program registration</a></li>
-      <!--<li><a href="#about">Shop the zoo store online</a></li>-->
+      <li><a href="#about">Education program registration</a></li>
+      
       </ul></p></div>
           <div class="w3-quarter w3-container w3-dark-grey w3-center w3-leftbar"><p><h2>CONTACT</h2>
       <ul class="w3-ul">
       <li><a href="#contact">Contact us</a></li>
       <li><a href="#employment">Employment</a></li>
       <li><a href="#faq">FAQ</a></li>
-      <!--<li><a href="#contact">Vendor opportunities</a></li>-->
+      
       </ul></p></div>
           <div class="w3-quarter w3-container w3-dark-grey w3-center w3-leftbar"><p><h2>STAY CONNECTED</h2>
       <ul class="w3-ul">
       <li><a href="#newsletter">Newsletter</a></li>
-      <li>Follow us on social media
-          <div class="w3-xlarge w3-section">
-          <a href="https://www.facebook.com/bigjoelsafari/"><i class="fa fa-facebook-official w3-hover-opacity"></i></a>
+      <li>Follow us on social media</li>
+          <li><a href="https://www.facebook.com/bigjoelsafari/"><i class="fa fa-facebook-official w3-hover-opacity"></i></a>
           <span style="display:inline-block; width: 6px;"></span>
           <a href="https://www.instagram.com/explore/locations/409581306/big-joels-safari-petting-zoo-educational-park/"><i class="fa fa-instagram w3-hover-opacity"></i></a>
-          </div></li>
+          </li>
       </ul></p></div>
         </div>
        
       
-      <!-- Footer -->
+      <!-- Footer 
       <footer class="w3-center w3-black w3-padding-64">
         <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
         <p>Privacy Policy | About This Site | Member of ZAA</br>
@@ -177,5 +176,5 @@
       function w3_close() {
           mySidebar.style.display = "none";
       }
-      </script>
+      </script>-->
 </html>
